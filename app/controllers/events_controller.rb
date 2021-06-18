@@ -18,4 +18,14 @@ class EventsController < ApplicationController
     redirect_to event_path(@event)
     # lub: redirect_to @event
   end
+
+  def new
+    @event = Event.new
+  end
+
+  def create
+    event_params = params.require(:event).permit(:name, :description, :location, :price, :starts_at)
+    @event = Event.create(event_params)
+    redirect_to @event
+  end
 end
