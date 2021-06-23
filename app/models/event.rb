@@ -3,6 +3,8 @@ class Event < ApplicationRecord
   # jesli metoda dotyczy jednego obiektu klasy (w całym Rubym) to jest instancyjna i tutaj używamy "self" wewnątrz metody(lub go pomijamy)
   # jeśli jest klasowa (dotyczy wszystkich obiektów klasy) w jej nazwie używamy self.nazwa
   
+  has_many :registrations, dependent: :destroy
+
   validates :name, :location, presence: true
   validates :description, length: { minimum: 25 }
   validates :price, numericality: { greater_than_or_equal_to: 0 }
