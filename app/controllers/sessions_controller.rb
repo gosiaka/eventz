@@ -11,8 +11,12 @@ class SessionsController < ApplicationController
     else
       flash.now[:alert] = "Invalid email/password combitanion!"
       render :new
-
     end
+  end
+
+  def destroy
+    session[:user_id] = nil
+    redirect_to events_path, notice: "You're now Signed Out"
   end
   
 end
