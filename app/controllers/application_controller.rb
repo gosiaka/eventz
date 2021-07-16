@@ -23,4 +23,10 @@ private
     end
   end
 
+  def require_admin
+    unless current_user.admin?
+      redirect_to events_path, alert: "Unauthorized access!"
+    end
+  end
+
 end
