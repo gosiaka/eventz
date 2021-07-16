@@ -49,9 +49,11 @@ class UsersController < ApplicationController
   end
 
   def require_correct_user
-    @user = User.find(params[:id])
-    unless current_user == @user
-      redirect_to events_path
-    end
+    @user = User.find(params[:id])    
+    # unless current_user?(@user)
+    #   redirect_to events_path
+    # end
+    # in one line:
+    redirect_to events_path unless current_user?(@user)    
   end
 end

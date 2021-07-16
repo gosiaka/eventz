@@ -10,6 +10,12 @@ private
   # avaliable for all views
   helper_method :current_user
 
+  def current_user?(user)
+    current_user == user
+  end
+
+  helper_method :current_user?
+
   def require_sign_in
     unless current_user
       redirect_to new_session_path, alert: "Please sign in"
