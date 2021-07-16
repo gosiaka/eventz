@@ -16,6 +16,12 @@ private
 
   helper_method :current_user?
 
+  def current_user_admin?
+    current_user && current_user.admin?
+  end
+
+  helper_method :current_user_admin?
+
   def require_sign_in
     unless current_user
       session[:intendent_url] = request.url
@@ -24,7 +30,7 @@ private
   end
 
   def require_admin
-    unless current_user.admin?
+    unless current_user_admin?
       redirect_to events_path, alert: "Unauthorized access!"
     end
   end
