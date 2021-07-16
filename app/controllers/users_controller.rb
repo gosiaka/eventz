@@ -2,12 +2,6 @@ class UsersController < ApplicationController
 
   before_action :require_sign_in, except: [:new, :create]
 
-  def require_sign_in
-    unless current_user
-      redirect_to new_session_path, alert: "Please sign in"
-    end
-  end
-
   def index
     @users = User.all
   end
