@@ -18,6 +18,7 @@ private
 
   def require_sign_in
     unless current_user
+      session[:intendent_url] = request.url
       redirect_to new_session_path, alert: "Please sign in"
     end
   end
