@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :likes
   root "events#index"
 
   resources :events do
     resources :registrations, only: [:index, :new, :create]
+    resources :likes, only: [:create]
   end
 
   resources :users, only: [:index, :show, :create, :edit, :update, :destroy]
