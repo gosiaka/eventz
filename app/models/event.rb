@@ -4,6 +4,7 @@ class Event < ApplicationRecord
   # jeśli jest klasowa (dotyczy wszystkich obiektów klasy) w jej nazwie używamy self.nazwa
   
   has_many :registrations, dependent: :destroy
+  has_many :likes,  dependent: :destroy
 
   validates :name, :location, presence: true
   validates :description, length: { minimum: 25 }
