@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :events do
     resources :registrations, only: [:index, :new, :create]
-    resources :likes, only: [:create]
+    resources :likes, only: [:create, :destroy]
   end
 
   resources :users, only: [:index, :show, :create, :edit, :update, :destroy]
