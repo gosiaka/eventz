@@ -23,5 +23,10 @@
   <%= f.label :image_file_name %>
   <%= f.text_field :image_file_name %>
 
+  <div class="checkboxes">
+    <%# halper: collection_check_boxes(name of attribute, collection of objects,value to use for the checkbox input, text to display next to checkbox) %>
+    <%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %>
+  </div>
+
   <%= f.submit %>
 <% end %>
