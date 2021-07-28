@@ -2,6 +2,7 @@ class EventsController < ApplicationController
 
   before_action :require_sign_in, except: [:index, :show]
   before_action :require_admin, except: [:index, :show]
+  before_action :set_event, only: [:show, :destroy, :edit, :update]
   
   def index
     case params[:filter]
@@ -17,7 +18,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
     @likers = @event.likers
     @categories = @event.categories
     if current_user
@@ -26,11 +26,9 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @event = Event.find(params[:id])
   end
 
   def update
-    @event = Event.find(params[:id])
     if @event.update(event_params)
       # flash[:notice] = "Event successfully updated!"
       # redirect_to event_path(@event)
@@ -55,11 +53,15 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    Event.find(params[:id]).destroy
+    @event.destroy
     redirect_to events_path
   end
 
   private
+
+  def set_event
+    @event = Event.find_by!(slug: params[:id])
+  end
 
   def event_params
     params.require(:event).permit(:name, :description, :location, :price, :starts_at, :capacity, :image_file_name, category_ids: [])
